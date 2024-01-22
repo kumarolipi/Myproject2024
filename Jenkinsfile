@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Git Checkout'){
             steps{
-                git 'https://github.com/kumarolipi/Devops.git'
+                git branch: 'master' url: 'https://github.com/kumarolipi/Myproject2024.git'
             }
         }
     }
