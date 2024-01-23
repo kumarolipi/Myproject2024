@@ -18,7 +18,7 @@ pipeline{
         }
         stage('Maven Build'){
             steps{
-                sh 'mvn release:update-versions'
+                sh 'mvn clean install'
             }
         }
         stage('SonarQube'){
@@ -44,13 +44,13 @@ pipeline{
             steps{
                 script{
 
-                    def readPomVersion = readMavenPom file: 'pom.xml'
+                    def mavenPom = readMavenPom file: 'pom.xml'
                     nexusArtifactUploader artifacts:
                      [
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-1.0.2.war',
+                            file: 'target/my-webapp-${mavenPom.version}.war',
                             type: 'war'
                         ]
                      ],
@@ -60,7 +60,7 @@ pipeline{
                     nexusVersion: 'nexus3',
                     protocol: 'http',
                     repository: 'Demoapp_release',
-                    version: "${readPomVersion.version}"
+                    version: "${mavenPom.version}"
 
                 }
             }
