@@ -18,8 +18,9 @@ pipeline{
         }
         stage('Maven Build'){
             steps{
-                sh 'mvn clean install'
                 sh 'mvn release:update-versions'
+                sh 'mvn clean install'
+
             }
         }
         stage('SonarQube'){
@@ -44,6 +45,7 @@ pipeline{
         stage("Nexus upload"){
             steps{
                 script{
+
                     def readPomVersion = readMavenPom file: 'pom.xml'
                     nexusArtifactUploader artifacts:
                      [
