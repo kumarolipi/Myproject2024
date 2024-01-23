@@ -48,7 +48,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-0.0.9.war',
+                            file: 'target/my-webapp-0.1.0.war',
                             type: 'war'
                         ]
                      ],
@@ -65,7 +65,10 @@ pipeline{
         stage('Docker image Build'){
             steps{
                 script{
-                    sh 'sudo docker build -t $JOB_NAME:v1.$BUILD_ID .'
+                withCredentials([string(credentialsId: 'dockerhub-auth', variable: 'dockerhub-aut')]) {
+                sh 'sudo docker build -t $JOB_NAME:v1.$BUILD_ID .'
+                    }
+
                 }
             }
         }
