@@ -18,7 +18,7 @@ pipeline{
         }
         stage('Maven Build'){
             steps{
-                sh 'mvn clean install'
+                sh 'mvn release:update-versions'
             }
         }
         stage('SonarQube'){
