@@ -48,7 +48,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-0.0.3.war',
+                            file: 'target/my-webapp-0.0.2.war',
                             type: 'war'
                         ]
                      ],
@@ -59,6 +59,15 @@ pipeline{
                     protocol: 'http',
                     repository: 'Demoapp_release',
                     version: "${readPomVersion.version}"
+                }
+            }
+        }
+        stage('Docker image Build'){
+            steps{
+                script{
+                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image tag $JOB_NAME:v1.$BUILD_ID kumarolipi/$JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image tag $JOB_NAME:v1.$BUILD_ID kumarolipi/$JOB_NAME:latest'
                 }
             }
         }
