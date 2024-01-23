@@ -48,7 +48,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-0.0.5.war',
+                            file: 'target/my-webapp-0.0.6.war',
                             type: 'war'
                         ]
                      ],
@@ -65,9 +65,9 @@ pipeline{
         stage('Docker image Build'){
             steps{
                 script{
-                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-                    sh 'docker image tag $JOB_NAME:v1.$BUILD_ID kumarolipi/$JOB_NAME:v1.$BUILD_ID'
-                    sh 'docker image tag $JOB_NAME:v1.$BUILD_ID kumarolipi/$JOB_NAME:latest'
+                    sh 'sudo docker image build -t $JOB_NAME:v1.$BUILD_ID .'
+                    sh 'sudo docker image tag $JOB_NAME:v1.$BUILD_ID kumarolipi/$JOB_NAME:v1.$BUILD_ID'
+                    sh 'sudo docker image tag $JOB_NAME:v1.$BUILD_ID kumarolipi/$JOB_NAME:latest'
                 }
             }
         }
