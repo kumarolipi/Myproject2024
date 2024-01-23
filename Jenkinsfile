@@ -26,6 +26,7 @@ pipeline{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonar-api') {
                     sh 'mvn clean package sonar:sonar'
+                    sh 'mvn release:update-versions'
                 }
 
                }
@@ -48,7 +49,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-0.1.1.war',
+                            file: 'target/my-webapp-1.0.1.war',
                             type: 'war'
                         ]
                      ],
@@ -65,9 +66,7 @@ pipeline{
         stage('Docker image Build'){
             steps{
                 script{
-                   sh 'docker build -t $JOB_NAME:v1.$BUILD_ID .'
-
-
+                   // sh 'sudo docker build -t $JOB_NAME:v1.$BUILD_ID .'
                 }
             }
         }
