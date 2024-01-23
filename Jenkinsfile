@@ -39,6 +39,28 @@ pipeline{
                 }
             }
         }
+        stage("Nexus upload"){
+            steps{
+                script{
+                    nexusArtifactUploader artifacts:
+                     [
+                        [
+                            artifactId: 'my-webapp',
+                            classifier: '',
+                            file: 'target/*.war',
+                            type: 'war'
+                        ]
+                     ],
+                    credentialsId: 'nexus-auth',
+                    groupId: 'com.example',
+                    nexusUrl: '3.110.41.173:8081',
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    repository: 'Demoapp_release',
+                    version: '1.0.0'
+                }
+            }
+        }
 
     }
 }
