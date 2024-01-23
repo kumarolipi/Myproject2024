@@ -27,20 +27,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <repositories>
-                    <repository>
-                        <id>Demoapp_release</id>
-                        <url>http://3.110.41.173:8081/repository/Demoapp_release</url>
-                        <releases>
-                            <enabled>true</enabled>
-                        </releases>
-                        <snapshots>
-                            <enabled>true</enabled>
-                        </snapshots>
-                    </repository>
-                </repositories>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.3</version>
