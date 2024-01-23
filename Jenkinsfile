@@ -19,6 +19,7 @@ pipeline{
         stage('Maven Build'){
             steps{
                 sh 'mvn clean install'
+                sh 'mvn release:update-versions'
             }
         }
         stage('SonarQube'){
@@ -26,6 +27,7 @@ pipeline{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonar-api') {
                     sh 'mvn clean package sonar:sonar'
+
                     }
 
                }
