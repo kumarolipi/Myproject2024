@@ -18,8 +18,7 @@ pipeline{
         }
         stage('Maven Build'){
             steps{
-                sh 'mvn release:update-versions'
-                sh 'mvn clean install'
+                sh 'mvn clean deploy release:update-versions'
 
             }
         }
