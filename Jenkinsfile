@@ -45,13 +45,12 @@ pipeline{
                 script{
 
                     def mavenPom = readMavenPom file: 'pom.xml'
-                    def versionNumber = readMavenPom().getVersion()
                     nexusArtifactUploader artifacts:
                      [
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-${mavenPom.version}.war',
+                            file: 'target/my-webapp-*.war',
                             type: 'war'
                         ]
                      ],
