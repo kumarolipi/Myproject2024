@@ -47,7 +47,7 @@
                   <artifactId>maven-release-plugin</artifactId>
                   <version>3.0.1</version> <!-- Use the latest version -->
                   <configuration>
-                    <tagNameFormat>@{project.version}</tagNameFormat>
+                    <tagNameFormat>@{mavenPom.version}</tagNameFormat>
                       <goals>install</goals>
                       <checkModificationExcludes>
                           <checkModificationExclude>pom.xml</checkModificationExclude>

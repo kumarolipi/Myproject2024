@@ -50,12 +50,12 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-*.war',
+                            file: 'target/my-webapp-${mavenPom.version}.war',
                             type: 'war'
                         ]
                      ],
                     credentialsId: 'nexus-auth',
-                    groupId: 'com.example',
+                    groupId: 'in.javahome',
                     nexusUrl: '3.110.41.173:8081',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
