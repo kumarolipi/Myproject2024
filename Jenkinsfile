@@ -60,14 +60,14 @@ pipeline{
                             protocol: 'http',
                             nexusUrl: '3.110.41.173:8081',
                             groupId: 'com.example',
-                            version: 1.0.3,
+                            version: 1.0,
                             repository: 'Demoapp_release',
                             credentialsId: 'nexus-auth',
                             artifacts: [
                                 // Artifact generated such as .jar, .ear and .war files.
                                 [artifactId: 'my-webapp',
                                 classifier: '',
-                                file: 'target/my-webapp-1.0.3-SNAPSHOT.war',
+                                file: 'target/my-webapp-1.0-SNAPSHOT.war',
                                 type: 'war'],
 
                                 // Lets upload the pom.xml file for additional information for Transitive dependencies
