@@ -50,7 +50,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-${mavenPom.version}.war',
+                            file: 'target/my-webapp-0.0.1.war',
                             type: 'war'
                         ]
                      ],
