@@ -25,7 +25,9 @@ pipeline{
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonar-api') {
+
                     sh 'mvn clean package sonar:sonar'
+                    sh 'mvn release:update-versions'
                     }
 
                }
@@ -48,7 +50,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-1.0.3.war',
+                            file: 'target/**.war',
                             type: 'war'
                         ]
                      ],
@@ -59,7 +61,7 @@ pipeline{
                     protocol: 'http',
                     repository: 'Demoapp_release',
                     version: "${readPomVersion.version}"
-                    sh 'mvn release:update-versions'
+
                 }
             }
         }
