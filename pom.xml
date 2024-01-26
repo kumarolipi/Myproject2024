@@ -5,19 +5,27 @@
 	<groupId>in.javahome</groupId>
 	<artifactId>simple-app</artifactId>
 	<packaging>war</packaging>
-	<version>3.0.0-SNAPSHOT</version>
-	<name>simple-app</name>
+	<version>1.0-SNAPSHOT</version>
+	<name>LoginWebApp Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- other dependencies go here -->
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.12</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>LoginWebApp</finalName>
+	</build>
 </project>
