@@ -24,34 +24,16 @@
     </dependencies>
     <build>
         <plugins>
+            <!-- Maven Release Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M4</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <releaseProfiles>release</releaseProfiles>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-            <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-release-plugin</artifactId>
-                  <version>3.0.1</version> <!-- Use the latest version -->
-                  <configuration>
-                    <tagNameFormat>${mavenPom.version}</tagNameFormat>
-                      <goals>install</goals>
-                      <checkModificationExcludes>
-                          <checkModificationExclude>pom.xml</checkModificationExclude>
-                      </checkModificationExcludes>
-                  </configuration>
             </plugin>
         </plugins>
     </build>
