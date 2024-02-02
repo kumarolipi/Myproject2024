@@ -51,7 +51,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-1.0.2-SNAPSHOT.war',
+                            file: 'target/my-webapp-1.0.2.war',
                             type: 'war'
                         ]
                      ],
@@ -60,7 +60,7 @@ pipeline{
                     nexusUrl: '15.206.195.205:8081',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    repository: 'Demoapp_snapshot',
+                    repository: 'nexusRepo',
                     version: "${readPomVersion.version}"
 
                 }
