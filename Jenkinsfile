@@ -68,7 +68,7 @@ pipeline{
         stage('Docker Build'){
                 steps{
                     script{
-                        sh "sudo docker buildx build -t kumarolipi/Jenins-img ."
+                        sh "sudo docker buildx build -t kumarolipi/jenkins-img ."
                    }
 
                 }
