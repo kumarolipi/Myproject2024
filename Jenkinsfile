@@ -50,13 +50,13 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-0.0.5.war',
+                            file: 'target/my-webapp-0.0.6.war',
                             type: 'war'
                         ]
                      ],
                     credentialsId: 'nexus-auth',
                     groupId: 'in.javahome',
-                    nexusUrl: '13.201.190.19:8081',
+                    nexusUrl: '15.206.195.205:8081',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
                     repository: 'Demoapp_release',
