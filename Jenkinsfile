@@ -51,7 +51,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/Uber.war',
+                            file: 'target/my-webapp.war',
                             type: 'war'
                         ]
                      ],
