@@ -81,7 +81,7 @@ pipeline{
                     script{
 
                     withCredentials([string(credentialsId: 'docker-new', variable: 'Docker_hub')]) {
-                         Inside this block, the credential is available as an environment variabl//
+
                         sh "sudo docker login -u kumarolipi -p ${docker-new}"
                         su 'sudo docker image push kumarolipi/$JOB_NAME:v1.$BUILD_ID'
                         su 'sudo docker image push kumarolipi/$JOB_NAME:latest'
