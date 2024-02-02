@@ -86,7 +86,7 @@ pipeline{
                         sh 'sudo docker image push kumarolipi/$JOB_NAME:v1.$BUILD_ID'
                         sh 'sudo docker image push kumarolipi/$JOB_NAME:latest'
                                 }
-                        sh 'docker rmi kumarolipi/$JOB_NAME:v1.$BUILD_ID'
+                        sh 'sudo docker rmi kumarolipi/$JOB_NAME:v1.$BUILD_ID'
 
                             }
 
