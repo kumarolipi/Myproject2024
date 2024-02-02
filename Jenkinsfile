@@ -2,11 +2,11 @@ pipeline{
     agent { label 'Jenkins' }
 
     environment {
-        NEXUS_Version = "nexus3"
+        NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL: "15.206.195.205:8081"
-        NEXUS_CREDENTIAL_ID : nexus-auth
-        NEXUS_REPOSITORY: LoginWebApp
+        NEXUS_URL = "15.206.195.205:8081"
+        NEXUS_CREDENTIAL_ID = nexus-auth
+        NEXUS_REPOSITORY = "LoginWebApp"
     }
     stages{
         stage('Git Checkout'){
