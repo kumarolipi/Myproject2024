@@ -22,6 +22,13 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+    <distributionManagement>
+    <repository>
+        <id>nexusRepo</id>
+        <url>http://15.206.195.205:8081/repository/nexusRepo</url>
+    </repository>
+</distributionManagement>
+
 
     <!-- Build Configuration -->
     <build>
