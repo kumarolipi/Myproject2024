@@ -9,7 +9,7 @@
     <artifactId>my-webapp</artifactId>
     <version>2.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>my-webapp</name>
+    <name>My Web Application</name>
 
     <!-- Dependencies -->
     <dependencies>
@@ -36,6 +36,28 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <!-- Maven War Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <!-- Configure the war plugin as needed -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version> <!-- Use the latest version -->
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>nexus-server</serverId>
+                    <nexusUrl>http://15.206.195.205:8081/repository/Demoapp_release/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+        </plugin>
         </plugins>
     </build>
 </project>
