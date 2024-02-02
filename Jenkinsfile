@@ -51,7 +51,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-1.0.4-SNAPSHOT.war',
+                            file: 'target/my-webapp-1.0.4.war',
                             type: 'war'
                         ]
                      ],
