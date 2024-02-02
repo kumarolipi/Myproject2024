@@ -79,10 +79,10 @@ pipeline{
         stage('Docker image push'){
                 steps{
                     script{
-                    withCredentials([usernamePassword(credentialsId: 'Docker_hub', usernameVariable: 'kumarolipi', passwordVariable: 'Docker_hub')]) {
-                    // Inside this block, the credentials are available as environment variables
-                        sh "echo 'Username: \${USERNAME}'"
-                        sh "echo 'Password: \${PASSWORD}'"
+
+                    withCredentials([string(credentialsId: 'Docker_hub', variable: 'Docker_hub')]) {
+                        // Inside this block, the credential is available as an environment variable
+                        sh "echo 'Docker Hub Password: \${Docker_hub}'"
                         sh "sudo docker login -u kumarolipi -p ${Docker_hub}"
                         su 'sudo docker image push kumarolipi/$JOB_NAME:v1.$BUILD_ID'
                         su 'sudo docker image push kumarolipi/$JOB_NAME:latest'
