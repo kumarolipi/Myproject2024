@@ -44,25 +44,14 @@ pipeline{
             steps{
                 script{
 
-                    pom = readMavenPom file: "pom.xml";
-                    // Find built artifact under target folder
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-                    // Print some info from the artifact found
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    // Extract the path from the File found
-                    artifactPath = filesByGlob[0].path;
-                    // Assign to a boolean response verifying If the artifact name exists
-                    artifactExists = fileExists artifactPath;
-
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-
+                    def readPomVersion = readMavenPom file: 'pom.xml'
+                    def nexusRepo = readMavenPom.version.endsWith("SNAPSHOT") ? "Demoapp_snapshot" : "Demoapp_release"
                     nexusArtifactUploader artifacts:
                      [
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/*.${pom.packaging}',
+                            file: 'target/my-webapp-2.0.0-SNAPSHOT.war',
                             type: 'war'
                         ]
                      ],
@@ -71,12 +60,19 @@ pipeline{
                     nexusUrl: '15.206.195.205:8081',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    repository: 'nexusRepo',
-                    version: "${pom.packaging}"
+                    repository: 'Demoapp_snapshot',
+                    version: "${readPomVersion.version}"
 
                 }
             }
         }
-       }
+        stage('Docker Build'){
+                steps{
+                    script{
+                        sh "sudo docker buildx build -t kumarolipi/jenkins-img ."
+                   }
+
+                }
+            }
     }
 }
