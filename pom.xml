@@ -39,21 +39,10 @@
 
             <!-- Maven War Plugin -->
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version> <!-- Use the latest version -->
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>nexus-server</serverId>
-                    <nexusUrl>http://15.206.195.205:8081/repository/Demoapp_release/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-        </plugin>
-            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
-                    <id>repackage</id>
+                <id>repackage</id>
                     <goals>
                         <goal>repackage</goal>
                     </goals>
