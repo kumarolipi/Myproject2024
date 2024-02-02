@@ -48,9 +48,9 @@ pipeline{
                     nexusArtifactUploader artifacts:
                      [
                         [
-                            artifactId: 'my-webapp',
+                            artifactId: 'my-my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-1.0.8.war',
+                            file: 'target/my-webapp-1.0.0.war',
                             type: 'war'
                         ]
                      ],
@@ -68,7 +68,7 @@ pipeline{
         stage('Docker Build'){
                 steps{
                     script{
-                        sh "sudo docker build -f Dockerfile"
+                        sh "sudo docker image build -f . "
 
                    }
 

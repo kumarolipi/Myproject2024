@@ -1,59 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-	<groupId>in.javahome</groupId>
-	<artifactId>my-webapp</artifactId>
-	<packaging>war</packaging>
-	<version>1.0.8</version>
-	<name>my-webapp</name>
-	<url>http://maven.apache.org</url>
+
+    <!-- Project Information -->
+    <groupId>in.javahome</groupId>
+    <artifactId>my-webapp</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
+    <name>My Project</name>
+
+    <!-- Dependencies -->
     <dependencies>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <version>3.2.0</version>
-            <type>maven-plugin</type>
-        </dependency>
-        <!-- other dependencies go here -->
+        <!-- Add your project dependencies here -->
     </dependencies>
+
+    <!-- Build Configuration -->
     <build>
         <plugins>
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <!-- Maven Surefire Plugin for running tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-            <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-release-plugin</artifactId>
-                  <version>3.0.1</version> <!-- Use the latest version -->
-                  <configuration>
-                    <tagNameFormat>${mavenPom.version}</tagNameFormat>
-                      <goals>install</goals>
-                      <checkModificationExcludes>
-                          <checkModificationExclude>pom.xml</checkModificationExclude>
-                      </checkModificationExcludes>
-                  </configuration>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
             </plugin>
         </plugins>
     </build>
+
+    <!-- SonarQube Configuration -->
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- SonarQube Maven Plugin -->
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>3.9.0.2155</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <!-- Nexus Repository Configuration -->
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://15.206.195.205:8081/repository/Demoapp_release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://15.206.195.205:8081/repository/Demoapp_snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
