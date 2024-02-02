@@ -1,1 +1,14 @@
 SonarQube: squ_7c9de0eca06a8c554ccfed76929f9841c111ef6d
+
+
+stage('Deploy in K8S'){
+                steps{
+                    script{
+                            withCredentials([sshUserPrivateKey(credentialsId: 'kube-config', keyFileVariable: 'k8s-config', passphraseVariable: 'k8s-config', usernameVariable: 'k8s-config')]) {
+
+                            sh 'kubectl apply -f jenkins-deployment.yaml'
+
+                            }
+                        }
+                    }
+                }
