@@ -51,7 +51,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp.war',
+                            file: 'target/${readPomVersion.version}.war',
                             type: 'war'
                         ]
                      ],
