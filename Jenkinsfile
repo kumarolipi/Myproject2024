@@ -92,7 +92,17 @@ pipeline{
 
                         }
                      }
+        stage('Deploy in K8S'){
+                steps{
+                    script{
+                            withCredentials([sshUserPrivateKey(credentialsId: 'kube-config', keyFileVariable: 'k8s-config', passphraseVariable: 'k8s-config', usernameVariable: 'k8s-config')]) {
 
+                            sh 'kubectl apply -f jenkins-deployment.yaml'
+
+                            }
+                        }
+                    }
+                }
 
     }
 }
