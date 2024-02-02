@@ -36,16 +36,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
-            <!-- Maven War Plugin -->
-            <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
-                    <configuration>
-                        <finalName>Uber</finalName>
-                    </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
