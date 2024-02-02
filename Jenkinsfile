@@ -1,7 +1,5 @@
 pipeline{
-    agent {
-	Labels : "Jenkins"
-    }
+	agent { label 'Jenkins' } 
     stages{
         stage('Git Checkout'){
             steps{
