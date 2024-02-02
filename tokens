@@ -1,14 +1,41 @@
 SonarQube: squ_7c9de0eca06a8c554ccfed76929f9841c111ef6d
 
 
-stage('Deploy in K8S'){
-                steps{
-                    script{
-                            withCredentials([sshUserPrivateKey(credentialsId: 'kube-config', keyFileVariable: 'k8s-config', passphraseVariable: 'k8s-config', usernameVariable: 'k8s-config')]) {
-
-                            sh 'kubectl apply -f jenkins-deployment.yaml'
-
-                            }
-                        }
-                    }
-                }
+-----BEGIN OPENSSH PRIVATE KEY-----
+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
+zx3zU8ya06vYUAAAALcm9vdEBNYXN0ZXI=
+-----END OPENSSH PRIVATE KEY-----
