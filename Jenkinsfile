@@ -69,7 +69,9 @@ pipeline{
         stage('Docker Build'){
                 steps{
                     script{
-                        sh "sudo docker buildx build -t kumarolipi/jenkins-img ."
+                        sh "docker image build -t $JOB_NAME:v1.$BUILD_ID"
+                        sh "docker image tag $JOB_NAME:v1.$BUILD_ID kumarolipi/$JOB_NAME:v1.$BUILD_ID"
+                        sh "docker image tag $JOB_NAME:v1.$BUILD_ID kumarolipi/$JOB_NAME:latest"
                    }
 
                 }
