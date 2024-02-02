@@ -102,10 +102,10 @@ pipeline{
                 sh '''
                     ansible-playbook -e vers=${BUILD_NUMBER} roles/site.yml
                 '''
+                    }
+                }
+
             }
         }
-
-        }
-
     }
 }
