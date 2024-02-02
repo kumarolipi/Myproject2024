@@ -1,13 +1,5 @@
 pipeline{
     agent { label 'Jenkins' }
-
-    environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "15.206.195.205:8081"
-        NEXUS_CREDENTIAL_ID = nexus-auth
-        NEXUS_REPOSITORY = "LoginWebApp"
-    }
     stages{
         stage('Git Checkout'){
             steps{
@@ -52,9 +44,6 @@ pipeline{
             steps{
                 script{
 
-                    steps {
-                script {
-                    // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
                     pom = readMavenPom file: "pom.xml";
                     // Find built artifact under target folder
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
@@ -67,45 +56,26 @@ pipeline{
 
                     if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                    nexusArtifactUploader artifacts:
+                     [
+                        [
+                            artifactId: 'my-webapp',
+                            classifier: '',
+                            file: 'target/*.${pom.packaging}',
+                            type: 'war'
+                        ]
+                     ],
+                    credentialsId: 'nexus-auth',
+                    groupId: 'com.example',
+                    nexusUrl: '15.206.195.205:8081',
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    repository: 'nexusRepo',
+                    version: "${pom.packaging.version}"
 
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: ARTIFACT_VERSION,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_CREDENTIAL_ID,
-                            artifacts: [
-                                // Artifact generated such as .jar, .ear and .war files.
-                                [artifactId: com.example,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging]
-                            ]
-                        );
-
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
-                    }
                 }
             }
         }
-        stage ('Execute Ansible Play - CD'){
-            agent {
-                label 'ansible'
-            }
-            steps{
-                script {
-                    git branch: 'feature/ansibleNexus', url: 'https://github.com/ranjit4github/Ansible_Demo_Project.git';
-                }
-                sh '''
-                    ansible-playbook -e vers=${BUILD_NUMBER} roles/site.yml
-                '''
-                    }
-                }
 
-            }
-        }
     }
 }
