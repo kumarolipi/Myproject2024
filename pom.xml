@@ -50,10 +50,10 @@
                 </configuration>
         </plugin>
             <plugin>
-                <executions>
 				<groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
+                <executions>
                 <execution>
                     <id>repackage</id>
                     <goals>
