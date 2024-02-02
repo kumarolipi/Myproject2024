@@ -39,15 +39,6 @@
 
             <!-- Maven War Plugin -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.1</version>
-                <configuration>
-                    <!-- Configure the war plugin as needed -->
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
                 <version>1.6.8</version> <!-- Use the latest version -->
@@ -59,9 +50,10 @@
                 </configuration>
         </plugin>
             <plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
+                <executions>
+				<groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
                 <execution>
                     <id>repackage</id>
                     <goals>
@@ -72,6 +64,7 @@
                     </configuration>
                 </execution>
             </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
