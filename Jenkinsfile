@@ -56,6 +56,7 @@ pipeline{
 
                     if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+
                     nexusArtifactUploader artifacts:
                      [
                         [
@@ -71,7 +72,7 @@ pipeline{
                     nexusVersion: 'nexus3',
                     protocol: 'http',
                     repository: 'nexusRepo',
-                    version: "${pom.packaging.version}"
+                    version: "${pom.packaging}"
 
                 }
             }
