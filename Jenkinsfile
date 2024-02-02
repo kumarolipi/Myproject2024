@@ -48,14 +48,14 @@ pipeline{
                     nexusArtifactUploader artifacts:
                      [
                         [
-                            artifactId: 'my-my-webapp',
+                            artifactId: 'my-webapp',
                             classifier: '',
                             file: 'target/my-webapp-1.0.0.war',
                             type: 'war'
                         ]
                      ],
                     credentialsId: 'nexus-auth',
-                    groupId: 'in.javahome',
+                    groupId: 'com.example',
                     nexusUrl: '15.206.195.205:8081',
                     nexusVersion: 'nexus3',
                     protocol: 'http',

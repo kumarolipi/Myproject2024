@@ -5,15 +5,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Project Information -->
-    <groupId>in.javahome</groupId>
+    <groupId>com.example</groupId>
     <artifactId>my-webapp</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
-    <name>My Project</name>
+    <name>My Web Application</name>
 
     <!-- Dependencies -->
     <dependencies>
         <!-- Add your project dependencies here -->
+        <!-- Example: Servlet API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <!-- Build Configuration -->
@@ -29,53 +36,17 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <!-- Maven War Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.1</version> <!-- Use a version compatible with your Maven version -->
-                    <configuration>
-                        <!-- ... -->
-                    </configuration>
-            </plugin>
-
-            <!-- Maven Surefire Plugin for running tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.3.1</version>
+                <configuration>
+                    <!-- Configure the war plugin as needed -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <!-- SonarQube Configuration -->
-    <profiles>
-        <profile>
-            <id>sonar</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <!-- SonarQube Maven Plugin -->
-                    <plugin>
-                        <groupId>org.sonarsource.scanner.maven</groupId>
-                        <artifactId>sonar-maven-plugin</artifactId>
-                        <version>3.9.0.2155</version>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
-    <!-- Nexus Repository Configuration -->
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <url>http://15.206.195.205:8081/repository/Demoapp_release/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://15.206.195.205:8081/repository/Demoapp_snapshot/</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
