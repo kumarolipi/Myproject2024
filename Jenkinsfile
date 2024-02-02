@@ -83,9 +83,10 @@ pipeline{
                     withCredentials([string(credentialsId: 'Docker-hub-pass', variable: 'hub-login')]) {
 
                         sh "sudo docker login"
-                        su 'sudo docker image push kumarolipi/$JOB_NAME:v1.$BUILD_ID'
-                        su 'sudo docker image push kumarolipi/$JOB_NAME:latest'
+                        sh 'sudo docker image push kumarolipi/$JOB_NAME:v1.$BUILD_ID'
+                        sh 'sudo docker image push kumarolipi/$JOB_NAME:latest'
                    }
+
                    }
 
                 }
