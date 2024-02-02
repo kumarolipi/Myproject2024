@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+  namespace: dev
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: kumarolipi/jenkins:latest
+        ports:
+        - containerPort: 8080
+        # Add other container configuration as needed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+  namespace: dev
+spec:
+  selector:
+    app: jenkins
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30000  # Specify the desired NodePort, adjust as needed

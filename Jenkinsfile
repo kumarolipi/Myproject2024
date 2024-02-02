@@ -85,10 +85,21 @@ pipeline{
                         sh "sudo docker login"
                         sh 'sudo docker image push kumarolipi/$JOB_NAME:v1.$BUILD_ID'
                         sh 'sudo docker image push kumarolipi/$JOB_NAME:latest'
-                   }
+                            }
 
-                   }
+                         }
 
+                     }
+        stage('Deploy in K8S'){
+                    steps{
+                        script{
+                            withCredentials([sshUserPrivateKey(credentialsId: 'kube-config', keyFileVariable: 'k8s-config', passphraseVariable: 'k8s-config', usernameVariable: 'k8s-config')]) {
+
+                            sh 'kubectl apply -f jenkins-deployment.yaml'
+
+                            }
+                        }
+                    }
                 }
             }
     }
