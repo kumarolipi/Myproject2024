@@ -95,10 +95,10 @@ pipeline{
         stage('Deploy in K8S'){
                 steps{
                     script{
-                           sshagent(credentials: ['k8s-config-id'], ignoreMissing: true) {
-                            sh 'kubectl apply -f jenkins-deployment.yaml'
+                            withCredentials([file(credentialsId: 'kube-config', variable: 'kube-config')]) {
 
                             }
+                            sh 'kubectl apply -f jenkins-deployment.yaml'
                         }
                     }
                 }
