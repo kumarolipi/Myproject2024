@@ -50,7 +50,7 @@ pipeline{
                         [
                             artifactId: 'my-webapp',
                             classifier: '',
-                            file: 'target/my-webapp-1.0.6.war',
+                            file: 'target/my-webapp-1.0.7.war',
                             type: 'war'
                         ]
                      ],
@@ -65,6 +65,14 @@ pipeline{
                 }
             }
         }
+        stage('Docker Build'){
+                steps{
+                    script{
+                        sh "sudo docker build -f Dockerfile"
 
+                   }
+
+                }
+            }
     }
 }

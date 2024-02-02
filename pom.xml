@@ -5,7 +5,7 @@
 	<groupId>in.javahome</groupId>
 	<artifactId>my-webapp</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.6</version>
+	<version>1.0.7</version>
 	<name>my-webapp</name>
 	<url>http://maven.apache.org</url>
     <dependencies>
