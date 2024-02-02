@@ -80,9 +80,9 @@ pipeline{
                 steps{
                     script{
 
-                    withCredentials([string(credentialsId: 'docker-new', variable: 'Docker_hub')]) {
+                    withCredentials([string(credentialsId: 'Docker-hub-pass', variable: 'hub-login')]) {
 
-                        sh "sudo docker login -u kumarolipi -p ${docker-new}"
+                        sh "sudo docker login -u kumarolipi -p ${Docker-hub-pass}"
                         su 'sudo docker image push kumarolipi/$JOB_NAME:v1.$BUILD_ID'
                         su 'sudo docker image push kumarolipi/$JOB_NAME:latest'
                    }
