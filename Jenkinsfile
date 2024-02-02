@@ -69,8 +69,7 @@ pipeline{
         stage('Docker Build'){
                 steps{
                     script{
-                        sh "docker buildx build -t kumarolipi/$JOB_NAME:v1.$BUILD_ID"
-                        sh "docker image tag $JOB_NAME:v1.$BUILD_ID kumarolipi/$JOB_NAME:latest"
+                        sh "docker image build -t kumarolipi/$JOB_NAME:v1.$BUILD_ID"
                    }
 
                 }
