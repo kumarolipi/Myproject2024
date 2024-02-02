@@ -27,10 +27,6 @@
             <id>Demoapp_snapshot</id>
             <url>http://15.206.195.205:8081/repository/Demoapp_snapshot/</url>
         </repository>
-        <repository>
-            <id>Demoapp_release</id>
-            <url>http://15.206.195.205:8081/repository/Demoapp_release/</url>
-        </repository>
 </distributionManagement>
 
 
