@@ -108,7 +108,7 @@ pipeline{
                         clusterName: 'kubernetes',
                         contextName: 'kubernetes', )
 
-                        sh " +X kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
+                        sh " kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
 
                 }
             }
