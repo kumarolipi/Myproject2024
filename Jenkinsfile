@@ -96,7 +96,7 @@ pipeline{
         stage('Deploy to Kubernetes') {
             steps {
                 sshagent(credentials: ['CONFIGFILE-KUBE'], ignoreMissing: true) {
-                     sh "scp -o StrictHostKeyChecking=no Jenkins-deployment.yaml ubuntu@15.206.68.210:/root/deploymentfiles"
+                     sh "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/ubuntu/.ssh/ Jenkins-deployment.yaml ubuntu@15.206.68.210:/root/deploymentfiles"
                             }
                 script{
                     try{
