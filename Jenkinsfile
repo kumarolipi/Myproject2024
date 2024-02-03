@@ -96,7 +96,7 @@ pipeline{
         stage('Deploy to Kubernetes') {
             steps {
                 sshagent(credentials: ['CONFIGFILE-KUBE'], ignoreMissing: true) {
-                     sh "sudo eval \$(ssh-agent -s)"
+                     sh "eval \$(ssh-agent -s)"
                      sh "sudo ssh-add /root/.ssh/id_rsa"
                      sh "sudo chmod -R 777 /root/.ssh/id_rsa"
                      sh "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa Jenkins-deployment.yaml ubuntu@15.206.68.210:/root/deploymentfiles"
