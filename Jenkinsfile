@@ -104,9 +104,7 @@ pipeline{
                     withKubeConfig(
                         credentialsId: 'kubeconfig',  // Replace with your Kubernetes credentials ID
                         serverUrl: 'https://172.31.45.211:6443',
-                        caCertificate: 'kubeconfig',
-                        clusterName: 'kubernetes',
-                        contextName: 'kubernetes',
+                        sh 'chmod u+x ./kubectl'
 
                     ) {
                         sh "kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
