@@ -106,11 +106,9 @@ pipeline{
                         serverUrl: 'https://172.31.45.211:6443',
                         caCertificate: 'kubeconfig',
                         clusterName: 'kubernetes',
-                        contextName: 'kubernetes',
+                        contextName: 'kubernetes', )
 
-                    ) {
-
-                        sh "kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
+                        sh " +X kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
                     }
                 }
             }
