@@ -94,18 +94,18 @@ pipeline{
                      }
         stage('Deploy in K8S'){
                 steps{
+                        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeconfig', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                            sh "scp -o StrictHostKeyChecking=no Jenkins-deployment.yaml ubuntu@15.206.68.210:/root/deploymentfiles/"
+
                     script{
-                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeconfig', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-
                         try{
-                            sh "kubectl apply -f jenkins-deployment.yaml"
+                            sh "ssh ubuntu@15.206.68.210 kubectl apply -f /root/deploymentfiles/Jenkins-deployment.yaml"
                         }catch(error){
-                            sh "kubectl create -f Jenkins-deployment.yaml"
-                                 }
-                            }
-
+                            sh "ssh ubuntu@15.206.68.210 kubectl create -f /root/deploymentfiles/Jenkins-deployment.yaml"
+                        }
                         }
                     }
-                }
+              }
         }
     }
+}
