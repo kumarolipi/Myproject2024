@@ -97,12 +97,13 @@ pipeline{
             steps {
                 withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubeconfig', namespace: '', serverUrl: 'https://172.31.45.211:6443']]) {
                     sh "kubectl get nodes -o wide"
+                script{
                     try{
                         sh "kubectl apply -f jenkins-deployment.yaml"
                     }catch(error){
                         sh "kubectl create -f jenkins-deployment.yaml"
-                    }
-                }
+                        }
+                     }
                 }
             }
         }
