@@ -1,10 +1,6 @@
 pipeline{
     agent { label 'Jenkins' }
 
-    environment {
-        KUBE_DEPLOYMENT_FILE = 'Jenkins-deployment.yaml'
-    }
-
     stages{
         stage('Git Checkout'){
             steps{
@@ -99,10 +95,16 @@ pipeline{
                      }
         stage('Deploy to Kubernetes') {
             steps {
-                script {
-                    sshagent(credentials: ['CONFIGFILE-KUBE'], ignoreMissing: true) {
-                            sh "kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
+                sshagent(credentials: ['CONFIGFILE-KUBE'], ignoreMissing: true) {
+                     sh "scp -o StrictHostKeyChecking=no Jenkins-deployment.yaml ubuntu@15.206.68.210:/root/deploymentfiles"
                             }
+                script{
+                    try{
+                    sh "ssh ubuntu@15.206.68.210 kubectl apply -f ."
+                    }catch(error){
+                    sh "ssh ubuntu@15.206.68.210 kubectl create -f ."
+                    }
+                }
 
 
                 }
