@@ -96,13 +96,14 @@ pipeline{
                 steps{
                     script{
                     withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeconfig', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-    // some block
-                        }
+
                         try{
                             sh "ssh ubuntu@15.206.68.210 kubectl apply -f jenkins-deployment.yaml"
                         }catch(error){
                             sh "ssh ubuntu@15.206.68.210 kubectl create -f Jenkins-deployment.yaml"
-                        }
+                                 }
+                            }
+
                         }
                     }
                 }
