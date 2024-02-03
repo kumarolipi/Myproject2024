@@ -109,8 +109,7 @@ pipeline{
                         contextName: 'kubernetes',
 
                     ) {
-                        sh 'chmod u+x ./kubectl'
-                        sh "kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
+                       sh "kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
                     }
                 }
             }
