@@ -95,18 +95,8 @@ pipeline{
                      }
         stage('Deploy to Kubernetes') {
             steps {
-                sshagent(credentials: ['CONFIGFILE-KUBE'], ignoreMissing: true) {
-                     sh "eval \$(ssh-agent -s)"
-                     sh "sudo -E ssh-add /root/.ssh/id_rsa"
-                     sh "sudo chmod -R 777 /root/.ssh/id_rsa"
-                     sh "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa Jenkins-deployment.yaml ubuntu@15.206.68.210:/root/deploymentfiles"
-                            }
-                script{
-                    try{
-                    sh "ssh ubuntu@15.206.68.210 kubectl apply -f ."
-                    }catch(error){
-                    sh "ssh ubuntu@15.206.68.210 kubectl create -f ."
-                    }
+                withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubeconfig', namespace: '', serverUrl: 'https://172.31.45.211:6443']]) {
+                    sh "./kubectl get nodes -o wide"
                 }
 
 
