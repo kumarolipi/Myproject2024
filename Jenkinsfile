@@ -100,21 +100,11 @@ pipeline{
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
-                    sh 'chmod +x kubectl'
-                    sh 'sudo mv kubectl /usr/local/bin/'
-                    sh 'kubectl version --client'
-                    withKubeConfig(
-                        credentialsId: 'kubeconfig',  // Replace with your Kubernetes credentials ID
-                        serverUrl: 'https://172.31.45.211:6443',
-                        caCertificate: 'kubeconfig',
-                        clusterName: 'kubernetes',
-                        contextName: 'kubernetes',
+                    sshagent(credentials: ['CONFIGFILE-KUBE'], ignoreMissing: true) {
+                            sh "kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
+                            }
 
-                    ) {
 
-                        sh "kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
-                    }
                 }
             }
         }
