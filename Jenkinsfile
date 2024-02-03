@@ -96,7 +96,7 @@ pipeline{
         stage('Deploy to Kubernetes') {
             steps {
                 withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubeconfig', namespace: '', serverUrl: 'https://172.31.45.211:6443']]) {
-                    sh "./kubectl get nodes -o wide"
+                    sh "kubectl get nodes -o wide"
                 }
 
 
