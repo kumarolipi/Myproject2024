@@ -25,7 +25,7 @@
     <distributionManagement>
         <repository>
             <id>Demoapp_Mixed</id>
-            <url>http://15.206.195.205:8081/repository/Demoapp_Mixed//</url>
+            <url>http://3.109.153.205:8081/repository/Demoapp_Mixed/</url>
         </repository>
 </distributionManagement>
 
