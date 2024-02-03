@@ -1,5 +1,10 @@
 pipeline{
     agent { label 'Jenkins' }
+
+    environment {
+        KUBE_DEPLOYMENT_FILE = 'Jenkins-deployment.yaml'
+    }
+
     stages{
         stage('Git Checkout'){
             steps{
@@ -92,20 +97,22 @@ pipeline{
 
                         }
                      }
-        stage('Deploy in K8S'){
-                steps{
-                        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeconfig', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                            sh "scp -o StrictHostKeyChecking=no Jenkins-deployment.yaml ubuntu@15.206.68.210:/root/deploymentfiles/"
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // Deploy using kubectl
+                    withKubeConfig(
+                        credentialsId: 'kubeconfig',  // Replace with your Kubernetes credentials ID
+                        serverUrl: 'https://172.31.45.211:6443',
+                        caCertificate: 'kubeconfig',
+                        clusterName: 'kubernetes',
+                        contextName: 'kubernetes',
 
-                    script{
-                        try{
-                            sh "ssh ubuntu@15.206.68.210 kubectl apply -f /root/deploymentfiles/Jenkins-deployment.yaml"
-                        }catch(error){
-                            sh "ssh ubuntu@15.206.68.210 kubectl create -f /root/deploymentfiles/Jenkins-deployment.yaml"
-                        }
-                        }
+                    ) {
+                        sh "kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
                     }
-              }
+                }
+            }
         }
     }
 }
