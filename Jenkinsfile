@@ -105,6 +105,7 @@ pipeline{
                         }
                         sh "kubectl get all -n dev -o wide"
                         sh "echo http://13.127.9.137:30000"
+                        sh "echo http://65.0.32.222:30000"
                      }
                 }
             }
