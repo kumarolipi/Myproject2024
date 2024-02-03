@@ -103,7 +103,8 @@ pipeline{
                     }catch(error){
                         sh "kubectl create -f jenkins-deployment.yaml"
                         }
-                        sh "kubectl get all -o wide ns=dev"
+                        sh "kubectl get all -n dev -o wide"
+                        sh "echo http://13.127.9.137:30000"
                      }
                 }
             }
