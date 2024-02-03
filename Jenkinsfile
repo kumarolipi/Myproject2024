@@ -1,9 +1,6 @@
 pipeline{
     agent { label 'Jenkins' }
 
-    environment {
-        KUBE_DEPLOYMENT_FILE = 'Jenkins-deployment.yaml'
-    }
 
     stages{
         stage('Git Checkout'){
@@ -100,15 +97,9 @@ pipeline{
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    // Deploy using kubectl
-                    withKubeConfig(
-                        credentialsId: 'kubeconfig',  // Replace with your Kubernetes credentials ID
-                        serverUrl: 'https://172.31.45.211:6443',
-                        caCertificate: 'kubeconfig',
-                        clusterName: 'kubernetes',
-                        contextName: 'kubernetes', )
-
-                        sh " kubectl apply -f ${env.KUBE_DEPLOYMENT_FILE}"
+                    sshagent(credentials: ['CONFIGFILE-KUBE'], ignoreMissing: true) {
+                        sh "kubectl apply -f jenkins-deployment.yaml"
+                    }
 
                 }
             }
